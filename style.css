@@ -1,0 +1,23 @@
+#document   {
+    padding: 30px;
+}
+.display    {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 50px;
+    max-width: 250px;
+    padding: 4px;
+    text-align: end;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+button  {
+    height  : 60px;
+    width   : 60px;
+    font-weight: bold;
+}
+
+.transp {
+    border-width: 0px;
+    visibility: hidden;
+}
