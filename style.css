@@ -1,7 +1,7 @@
-#document   {
+#buttonDiv   {
     padding: 30px;
 }
-.display    {
+#display    {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 50px;
     max-width: 250px;
