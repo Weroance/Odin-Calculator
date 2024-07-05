@@ -1,18 +1,19 @@
-const display = document.querySelector('#display')
-const buttons = document.querySelector('#buttonDiv')
-//  array a
-let arrA = [];
-//  array b
-let arrB = [];
-//  operator var
-let operator = null
+const buttons = document.querySelector('#buttonDiv');
+const display = document.querySelector('#display');
+const oprDisplay = document.querySelector('#oprDisplay')
 
- 
-//  evaluate function
+let arrA = [];
+let operator = null;
+let arrB = [];
+let x = 0;
+let value = null;
+let enterCase = 0
+
+display.textContent = '0'
+
 evaluate = function(){
     let a = Number(arrA.join(''));
     let b = Number(arrB.join(''));
-    let x = 0
     switch (operator){
         case '+': 
           x =  a + b;
@@ -27,90 +28,193 @@ evaluate = function(){
           x = a / b;
             break;
     }
-    clear()
-    arrA = x.toString().split('')
+}
+// switch to  load value and call each button function and then clear value i think
+clickFuction = function(event){
+  value = event.target.value
+    switch (value){
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            number()
+            break;
+        
+        case '0':
+            zero();
+            break;
+            
+        case '.':
+            decimal()
+            break;
+        
+        case '-':
+            subtract()
+            break;
+        
+        case '+':
+            add()
+            break;
+        
+        case '*':
+            multiply()
+            break;
+        
+        case '/':
+            divide()
+            break;
+
+        case 'clr':
+          clear()
+          break;
+        
+        case 'ent':
+          enter()
+          break;
+
+    }
+    oprDisplay.textContent = operator;
 }
 
+
+number = function(){
+  if (enterCase == 1){
+    arrA = [];
+    enterCase = 0;
+  }
+  
+  if (!operator){ 
+    arrA.push(value);
+    display.textContent = arrA.join('')
+  }
+  else { 
+    arrB.push(value);
+    display.textContent = arrB.join('')
+  }
+  
+}
+
+zero = function(){
+  if (enterCase == 1){
+    arrA = [];
+    enterCase = 0;
+  }
+  
+  if (!operator && Number(arrA.join('')) != 0){
+      arrA.push('0');
+      display.textContent = arrA.join('');
+    }
+  else if (operator && Number(arrB.join('')) != 0){
+    arrB.push('0');
+    display.textContent = arrB.join('');
+  }
+}
+
+decimal = function(){
+  if (enterCase == 1){
+    arrA = [];
+    enterCase = 0;
+  }
+  
+  if (!operator && !arrA.includes('.')){ 
+    arrA.push('.');
+    display.textContent = arrA.join('')
+  }
+  
+  else if (operator && !arrB.includes('.')){
+    arrB.push('.');
+    display.textContent = arrB.join('');
+    }
+  }
+  
+subtract = function(){
+  
+  if (!operator){
+    if ( arrA.length == 0){ 
+      arrA.push('-');
+      display.textContent = arrA.join('');
+    }
+    else { operator = '-'}
+  }
+  else if (operator){
+      if ( arrB.length == 0){ 
+        arrB.push('-');
+        display.textContent = arrB.join('');
+      }
+      else {
+          evaluate();
+          arrA = [];
+          arrA.push(x);
+          operator = '-'
+          arrB = [];
+          display.textContent = Number(arrA.join(''));
+      }
+  }
+}
+
+
+add = function(){
+  if (arrA.length !=0 && arrB.length == 0 ){ operator = '+'}
+  else if (operator && arrB.length != 0 ){
+    evaluate();
+    arrA = [];
+    arrA.push(x);
+    operator = '+';
+    arrB = []
+    display.textContent = Number(arrA.join(''));
+  }
+}
+
+multiply = function(){
+  if (arrA.length !=0 && arrB.length == 0 ){ operator = '*'}
+  else if (operator && arrB.length != 0){
+    evaluate();
+    arrA = [];
+    arrA.push(x);
+    operator = '*';
+    arrB = []
+    display.textContent = Number(arrA.join(''));
+  }
+}
+
+divide = function(){
+  if (arrA.length !=0 && arrB.length == 0 ){ operator = '/'}
+  else if (operator && arrB.length != 0){
+    evaluate();
+    arrA = [];
+    arrA.push(x);
+    operator = '/';
+    arrB = []
+    display.textContent = Number(arrA.join(''));
+  }
+}
+
+enter = function(){
+  
+  if (arrB.length != 0){
+    evaluate();
+    arrA = [];
+    arrA.push(x);
+    operator = null;
+    arrB = []
+    display.textContent = Number(arrA.join(''));
+    enterCase = 1;
+  }
+  
+}
 
 clear = function(){
-    arrA = [];
-    arrB = [];
-    operator = null;
+  arrA = [];
+  operator = null;
+  arrB = [];
+  x = 0;
+  value = null;
+  display.textContent = '0'
 }
 
-
-
-
-displayUpdate = function(){
-// if B is not empty show B else show A
-   if (arrB.length != 0) { display.textContent = arrB.join('') }
-   else if (arrA.length != 0 ) {display.textContent = arrA.join('')}
-    else{ display.textContent = 0}
-       // show operator somehow??
-}
-
-
-
-//  button press function 
-buttonclick = function(event){
-  const value = event.target.value ;
-  const id = event.target.id;
-  switch (id){
-
-  case 'num':{
-              // no operator is stored: push value to A
-              // operator is stored: push to value B          
-      if (!operator){arrA.push(value)}
-      else {arrB.push(value)} 
-  }
-  break;
-  // dec, and:
-  case 'dec':{
-              // no operator is stored, and: 
-                                          // A is empty push 0,'.' to A
-                                          // A is not empty push to A
-      if (!operator){
-        if (arrA.length == 0){ arrA.push(0,'.')}
-        else (arrA.push('.'))
-      }
-            // operator is stored, and:
-                                          // B is empty push 0,'.' to B
-                                          // B is not empty push '.' to B
-      else {
-        if (arrB.length == 0) { arrB.push(0,'.')}
-        else { arrB.push('.')}
-      }
-  }
-  break;
-    // opr  , and:
-  case 'opr':{
-                // A is empty and operator = '-' push '-' to A
-      console.log(arrA.length == 0)         
-      if (arrA.length == 0 && value == '-') {arrA.push('-')}
-                // A is empty and operator != '-' push 0 to A
-      else if (arrA.length == 0 && value != '-'){ arrA.push(0)}
-                // operator is empty, operator = value        
-      if (!operator) {operator = value}
-                // operator is stored and b is not empty call evaluate function and replace operator with value
-      else if (operator && arrB){ 
-        evaluate();
-        operator = value
-      }
-  }
-  break;
-    // Ent, and operator is stored and B is not empty call evaluate function
-  case 'ent':{
-        if (operator && arrB) {evaluate()}
-  }
-  break;
-    // clr -- call clear function 
-  case 'clr':{
-        clear()
-  }
-break;
-}
-
-displayUpdate()
-
-}
-buttons.addEventListener('click',buttonclick)
+buttons.addEventListener('click',clickFuction);
