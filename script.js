@@ -31,7 +31,8 @@ evaluate = function(){
 }
 // switch to  load value and call each button function and then clear value i think
 clickFuction = function(event){
-  value = event.target.value
+  if (event.target.tagName === 'BUTTON'){
+    value = event.target.value
     switch (value){
         case '1':
         case '2':
@@ -68,7 +69,7 @@ clickFuction = function(event){
         case '/':
             divide()
             break;
-
+    
         case 'clr':
           clear()
           break;
@@ -76,14 +77,15 @@ clickFuction = function(event){
         case 'ent':
           enter()
           break;
-
+    
     }
     oprDisplay.textContent = operator;
+  }
 }
 
 
 number = function(){
-  if (enterCase == 1){
+  if (enterCase){
     arrA = [];
     enterCase = 0;
   }
@@ -100,23 +102,23 @@ number = function(){
 }
 
 zero = function(){
-  if (enterCase == 1){
+  if (enterCase){
     arrA = [];
     enterCase = 0;
   }
   
-  if (!operator && Number(arrA.join('')) != 0){
+  if ( arrA.length == 0 ){
       arrA.push('0');
       display.textContent = arrA.join('');
     }
-  else if (operator && Number(arrB.join('')) != 0){
+  else if (operator && arrB.length == 0){
     arrB.push('0');
     display.textContent = arrB.join('');
   }
 }
 
 decimal = function(){
-  if (enterCase == 1){
+  if (enterCase){
     arrA = [];
     enterCase = 0;
   }
@@ -133,7 +135,6 @@ decimal = function(){
   }
   
 subtract = function(){
-  
   if (!operator){
     if ( arrA.length == 0){ 
       arrA.push('-');
@@ -155,6 +156,7 @@ subtract = function(){
           display.textContent = Number(arrA.join(''));
       }
   }
+  enterCase = 0;
 }
 
 
@@ -168,6 +170,7 @@ add = function(){
     arrB = []
     display.textContent = Number(arrA.join(''));
   }
+  enterCase = 0;
 }
 
 multiply = function(){
@@ -180,6 +183,7 @@ multiply = function(){
     arrB = []
     display.textContent = Number(arrA.join(''));
   }
+  enterCase = 0;
 }
 
 divide = function(){
@@ -192,6 +196,7 @@ divide = function(){
     arrB = []
     display.textContent = Number(arrA.join(''));
   }
+  enterCase = 0;
 }
 
 enter = function(){
@@ -215,6 +220,7 @@ clear = function(){
   x = 0;
   value = null;
   display.textContent = '0'
+  enterCase = 0;
 }
 
 buttons.addEventListener('click',clickFuction);
