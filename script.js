@@ -48,7 +48,7 @@ clickFuction = function(event){
             break;
         
         case '0':
-            zero();
+            number();
             break;
             
         case '.':
