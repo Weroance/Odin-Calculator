@@ -106,12 +106,13 @@ zero = function(){
     arrA = [];
     enterCase = 0;
   }
-  
-  if ( arrA.length == 0 ){
+  if (!operator){
+    if ( !arrA.length ){
       arrA.push('0');
       display.textContent = arrA.join('');
     }
-  else if (operator && arrB.length == 0){
+  }
+  else if ( !arrB.length ){
     arrB.push('0');
     display.textContent = arrB.join('');
   }
