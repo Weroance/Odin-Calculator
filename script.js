@@ -26,6 +26,7 @@ evaluate = function(){
             break;
         case '/':
           x = a / b;
+          if ( x == 'Infinity'){ x = 'Snark!'}
             break;
     }
 }
@@ -154,7 +155,7 @@ subtract = function(){
           arrA.push(x);
           operator = '-'
           arrB = [];
-          display.textContent = Number(arrA.join(''));
+          display.textContent = arrA.join('');
       }
   }
   enterCase = 0;
@@ -169,7 +170,7 @@ add = function(){
     arrA.push(x);
     operator = '+';
     arrB = []
-    display.textContent = Number(arrA.join(''));
+    display.textContent = arrA.join('');
   }
   enterCase = 0;
 }
@@ -182,7 +183,7 @@ multiply = function(){
     arrA.push(x);
     operator = '*';
     arrB = []
-    display.textContent = Number(arrA.join(''));
+    display.textContent = arrA.join('');
   }
   enterCase = 0;
 }
@@ -195,7 +196,7 @@ divide = function(){
     arrA.push(x);
     operator = '/';
     arrB = []
-    display.textContent = Number(arrA.join(''));
+    display.textContent = arrA.join('');
   }
   enterCase = 0;
 }
@@ -208,7 +209,7 @@ enter = function(){
     arrA.push(x);
     operator = null;
     arrB = []
-    display.textContent = Number(arrA.join(''));
+    display.textContent = arrA.join('');
     enterCase = 1;
   }
   
