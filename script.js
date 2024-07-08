@@ -1,6 +1,7 @@
 const buttons = document.querySelector('#buttonDiv');
 const display = document.querySelector('#display');
-const oprDisplay = document.querySelector('#oprDisplay')
+const oprDisplay = document.querySelector('#oprDisplay');
+const validKeys = new Set([ '+', '-', '*', '/', 'c', 'x', 'Delete', 'Backspace', 'Enter', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ]);
 
 let arrA = [];
 let operator = null;
@@ -10,6 +11,22 @@ let value = null;
 let enterCase = 0
 
 display.textContent = '0'
+
+clickFunction = function(event){
+  // prevent non-button clicks
+  if (event.target.tagName === 'BUTTON'){
+    value = event.target.value
+    eventFunction()
+  }
+}
+
+keypressFunction = function(event){
+  let key = event.key
+  if ( validKeys.has(key) ){
+    value = key;
+    eventFunction();
+  }
+}
 
 evaluate = function(){
     let a = Number(arrA.join(''));
@@ -31,9 +48,8 @@ evaluate = function(){
     }
 }
 // switch to  load value and call each button function and then clear value i think
-clickFuction = function(event){
-  if (event.target.tagName === 'BUTTON'){
-    value = event.target.value
+eventFunction = function(){
+  
     switch (value){
         case '1':
         case '2':
@@ -67,21 +83,33 @@ clickFuction = function(event){
             multiply()
             break;
         
+        case 'x':
+            multiply()
+            break;
+        
         case '/':
             divide()
             break;
     
-        case 'clr':
+        case 'Delete':
+          clear()
+          break;
+
+        case 'c':
           clear()
           break;
         
-        case 'ent':
+        case 'Enter':
           enter()
+          break;
+        
+         case 'Backspace':
+          backspace()
           break;
     
     }
-    oprDisplay.textContent = operator;
-  }
+    if (operator) { oprDisplay.textContent = operator }
+    else if (!operator) {oprDisplay.textContent = ''}
 }
 
 
@@ -102,22 +130,6 @@ number = function(){
   
 }
 
-zero = function(){
-  if (enterCase){
-    arrA = [];
-    enterCase = 0;
-  }
-  if (!operator){
-    if ( !arrA.length ){
-      arrA.push('0');
-      display.textContent = arrA.join('');
-    }
-  }
-  else if ( !arrB.length ){
-    arrB.push('0');
-    display.textContent = arrB.join('');
-  }
-}
 
 decimal = function(){
   if (enterCase){
@@ -215,6 +227,24 @@ enter = function(){
   
 }
 
+backspace = function(){
+
+    if (enterCase){
+      arrA = [];
+      enterCase = 0;
+    }
+    
+    if (!operator){ 
+      arrA.pop();
+      if ( arrA.length == 0){arrA = [0]}
+      display.textContent = arrA.join('')
+    }
+    else { 
+      arrB.pop();
+      display.textContent = arrB.join('')
+    }
+  }
+
 clear = function(){
   arrA = [];
   operator = null;
@@ -224,5 +254,5 @@ clear = function(){
   display.textContent = '0'
   enterCase = 0;
 }
-
-buttons.addEventListener('click',clickFuction);
+document.addEventListener('keydown', keypressFunction)
+buttons.addEventListener('click', clickFunction);

@@ -1,34 +1,61 @@
+::selection {
+    color: hwb(26 46% 0%);
+    background-color:blanchedalmond ;
+}
+body    {
+    
+    background-color: hwb(26 42% 2%);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
 #buttonDiv   {
     padding: 30px;
+    font-family: "Concert One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: blanchedalmond
 }
 #displayBox {
-   
+    flex-grow: 1;
+    border: 6px;
+    border-style: solid;
+    border-radius: 10px;
     display: flex;
+    text-align: center;
     flex-direction: row;
 }
 #display    {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    align-items: center;
     font-size: 50px;
     padding: 4px;
     text-align: end;
-    
-    
+    flex-grow: 1;  
 }
 
 #oprDisplay {
     width: 20px;
     padding: 10px;
-    font-size: 25px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    
 
 }
 button  {
+    font-family: inherit;
+    font-size: large;
     height  : 60px;
     width   : 60px;
-    font-weight: bold;
+    margin: 3px;
+    color: blanchedalmond;
+    background-color: hwb(26 46% 0%);
+    border-color: hwb(26 42% 3%);
+    border-width: 6px;
+    border-radius: 5px;
 }
 
 .transp {
     border-width: 0px;
     visibility: hidden;
 }
+
