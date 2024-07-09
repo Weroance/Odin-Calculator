@@ -46,7 +46,7 @@ evaluate = function(op){
             break;
         case '/':
           x = a / b;
-          if ( x == 'Infinity'){ x = 'Snark!'}
+          if ( a == 0 && b == 0 ){ x = 'Snark!'}
             break;
     }
     arrA = [];
