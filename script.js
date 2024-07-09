@@ -221,12 +221,13 @@ backspace = function(){
     
     if (!operator){ 
       arrA.pop();
-      if ( arrA.length == 0){arrA = [0]}
-      display.textContent = arrA.join('')
+      if ( arrA.length == 0){ display.textContent = '0'}
+      else { display.textContent = arrA.join('') }
     }
     else { 
       arrB.pop();
-      display.textContent = arrB.join('')
+      if ( arrB.length == 0){ display.textContent = '0'}
+      else { display.textContent = arrB.join('') }
     }
   }
 
