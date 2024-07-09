@@ -1,5 +1,7 @@
 const buttons = document.querySelector('#buttonDiv');
-const display = document.querySelector('#display');
+const displayBox = document.querySelector('#displayBox')
+const display = document.createElement('div');
+display.id = 'display'
 const oprDisplay = document.querySelector('#oprDisplay');
 const validKeys = new Set([ '+', '-', '*', '/', 'c', 'x', 'Delete', 'Backspace', 'Enter', '.', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ]);
 
@@ -17,6 +19,7 @@ clickFunction = function(event){
   if (event.target.tagName === 'BUTTON'){
     value = event.target.value
     eventFunction()
+    event.target.blur()
   }
 }
 
@@ -47,7 +50,7 @@ evaluate = function(){
             break;
     }
 }
-// switch to  load value and call each button function and then clear value i think
+// switch to load value and call each button function and then clear value i think
 eventFunction = function(){
   
     switch (value){
@@ -110,9 +113,16 @@ eventFunction = function(){
     }
     if (operator) { oprDisplay.textContent = operator }
     else if (!operator) {oprDisplay.textContent = ''}
+
 }
 
-
+// updateDisplay = function(input){
+//   switch (input) {
+//     case: '0'
+//     case: 'a'
+//     case: 
+//   }
+// }
 number = function(){
   if (enterCase){
     arrA = [];
@@ -254,5 +264,6 @@ clear = function(){
   display.textContent = '0'
   enterCase = 0;
 }
+displayBox.appendChild(display);
 document.addEventListener('keydown', keypressFunction)
 buttons.addEventListener('click', clickFunction);

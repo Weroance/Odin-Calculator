@@ -11,26 +11,33 @@ body    {
     justify-content: center;
 }
 #buttonDiv   {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     padding: 30px;
     font-family: "Concert One", sans-serif;
     font-weight: 400;
     font-style: normal;
-    color: blanchedalmond
 }
 #displayBox {
-    flex-grow: 1;
-    border: 6px;
-    border-style: solid;
-    border-radius: 10px;
     display: flex;
-    text-align: center;
-    flex-direction: row;
+    flex-grow: 1;
+    min-width: 268px;
+    color: hwb(26 32% 30%);
+    border: 6px;
+    border-radius: 10px;
+    border-style: inset;
+    border-color: hwb(26 60% 0%);
+       
 }
 #display    {
+    
+
     align-items: center;
     font-size: 50px;
-    padding: 4px;
-    text-align: end;
+    padding: 5px;
+    text-align: right;
     flex-grow: 1;  
 }
 
@@ -41,21 +48,22 @@ body    {
     
 
 }
+
 button  {
     font-family: inherit;
     font-size: large;
     height  : 60px;
     width   : 60px;
-    margin: 3px;
+    margin: 6px 4px;
     color: blanchedalmond;
     background-color: hwb(26 46% 0%);
-    border-color: hwb(26 42% 3%);
+    border-color: hwb(26 60% 0%);
     border-width: 6px;
-    border-radius: 5px;
+    border-radius: 30px;
+    vertical-align:middle;
 }
 
 .transp {
-    border-width: 0px;
     visibility: hidden;
 }
 
