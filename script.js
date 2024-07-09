@@ -31,7 +31,7 @@ keypressFunction = function(event){
   }
 }
 
-evaluate = function(){
+evaluate = function(op){
     let a = Number(arrA.join(''));
     let b = Number(arrB.join(''));
     switch (operator){
@@ -49,6 +49,11 @@ evaluate = function(){
           if ( x == 'Infinity'){ x = 'Snark!'}
             break;
     }
+    arrA = [];
+    arrA.push(x);
+    operator = op;
+    arrB = []
+    display.textContent = arrA.join('');
 }
 // switch to load value and call each button function and then clear value i think
 eventFunction = function(){
@@ -116,13 +121,7 @@ eventFunction = function(){
 
 }
 
-// updateDisplay = function(input){
-//   switch (input) {
-//     case: '0'
-//     case: 'a'
-//     case: 
-//   }
-// }
+
 number = function(){
   if (enterCase){
     arrA = [];
@@ -172,13 +171,8 @@ subtract = function(){
         display.textContent = arrB.join('');
       }
       else {
-          evaluate();
-          arrA = [];
-          arrA.push(x);
-          operator = '-'
-          arrB = [];
-          display.textContent = arrA.join('');
-      }
+          evaluate('-');
+          }
   }
   enterCase = 0;
 }
@@ -187,12 +181,7 @@ subtract = function(){
 add = function(){
   if (arrA.length !=0 && arrB.length == 0 ){ operator = '+'}
   else if (operator && arrB.length != 0 ){
-    evaluate();
-    arrA = [];
-    arrA.push(x);
-    operator = '+';
-    arrB = []
-    display.textContent = arrA.join('');
+    evaluate('+');
   }
   enterCase = 0;
 }
@@ -200,12 +189,7 @@ add = function(){
 multiply = function(){
   if (arrA.length !=0 && arrB.length == 0 ){ operator = '*'}
   else if (operator && arrB.length != 0){
-    evaluate();
-    arrA = [];
-    arrA.push(x);
-    operator = '*';
-    arrB = []
-    display.textContent = arrA.join('');
+    evaluate('*');
   }
   enterCase = 0;
 }
@@ -213,12 +197,7 @@ multiply = function(){
 divide = function(){
   if (arrA.length !=0 && arrB.length == 0 ){ operator = '/'}
   else if (operator && arrB.length != 0){
-    evaluate();
-    arrA = [];
-    arrA.push(x);
-    operator = '/';
-    arrB = []
-    display.textContent = arrA.join('');
+    evaluate('/');
   }
   enterCase = 0;
 }
@@ -226,12 +205,8 @@ divide = function(){
 enter = function(){
   
   if (arrB.length != 0){
-    evaluate();
-    arrA = [];
-    arrA.push(x);
-    operator = null;
-    arrB = []
-    display.textContent = arrA.join('');
+    evaluate(null);
+    
     enterCase = 1;
   }
   
